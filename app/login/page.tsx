@@ -3,13 +3,13 @@
 import { signIn } from "@/lib/auth";
 import styles from "./Login.module.css";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ADMIN_ROUTE } from "@/lib/routes";
+import { SECRET1_ROUTE } from "@/lib/routes";
 
 export default function Login() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const continueTo = searchParams.get("continueTo") ?? ADMIN_ROUTE;
+  const continueTo = searchParams.get("continueTo") ?? SECRET1_ROUTE;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

@@ -1,3 +1,3 @@
 export const LOGIN_ROUTE = "/login";
-export const ADMIN_ROUTE = "/protected/admin";
-export const PROFILE_ROUTE = "/protected/profile";
+export const SECRET1_ROUTE = "/protected/secret1";
+export const SECRET2_ROUTE = "/protected/secret2";

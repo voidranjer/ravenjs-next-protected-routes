@@ -7,6 +7,7 @@ export default function AuthGuard() {
 
   return (
     <div>
+      <pre>You are trying to access: {pathname}</pre>
       You have found a secret place! Please <Link href={`${LOGIN_ROUTE}?continueTo=${pathname}`}>Log In</Link> to continue.
     </div>
   );
