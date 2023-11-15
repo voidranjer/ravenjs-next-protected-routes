@@ -3,9 +3,10 @@
 import { signOut } from "@/lib/auth";
 
 export default function Profile() {
-  function handleLogout() {
-    signOut();
+  async function handleLogout() {
+    await signOut();
   }
+
   return (
     <div>
       <h1>Profile</h1>

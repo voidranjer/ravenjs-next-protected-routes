@@ -9,8 +9,7 @@ import { useUser } from "@/lib/auth";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const initialState = typeof window === "undefined" ? null : JSON.parse(localStorage.getItem("user") || "null");
-  const user = useUser(initialState);
+  const user = useUser(JSON.parse(window.localStorage.getItem("user") ?? "null"));
 
   return (
     <html lang="en">
@@ -26,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Link className="nav-secret" href={PROFILE_ROUTE}>
             Profile
           </Link>
-          {user === null ? <Link href={LOGIN_ROUTE}>Login</Link> : user?.email}
+          {user ? user?.email : <Link href={LOGIN_ROUTE}>Login</Link>}
         </nav>
         <div className="container">{children}</div>
       </body>

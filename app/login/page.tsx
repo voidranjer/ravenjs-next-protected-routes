@@ -2,15 +2,14 @@
 
 import { signIn } from "@/lib/auth";
 import styles from "./Login.module.css";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ADMIN_ROUTE } from "@/lib/routes";
-import { useSearchParams } from "next/navigation";
 
 export default function Login() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const continueTo = searchParams.get("continueTo");
+  const continueTo = searchParams.get("continueTo") ?? ADMIN_ROUTE;
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -21,7 +20,7 @@ export default function Login() {
 
     try {
       await signIn(username, password, rememberMe);
-      router.replace(continueTo || ADMIN_ROUTE); // WARNING: Security issue, should be validated if it's a invalid/malicious URL
+      router.replace(continueTo);
     } catch (error) {
       window.alert(error);
     }
@@ -42,7 +41,7 @@ export default function Login() {
 
         <button type="submit">Login</button>
 
-        {continueTo && <pre>next: {continueTo}</pre>}
+        <pre>next: {continueTo}</pre>
       </form>
     </div>
   );
