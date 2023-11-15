@@ -12,15 +12,11 @@ export async function signOut() {
   return firebaseSignOut(auth);
 }
 
-export function useUser(cachedUser: FirebaseUser | null) {
-  const [user, setUser] = useState<FirebaseUser | null>(cachedUser);
+export function useUser() {
+  const [user, setUser] = useState<FirebaseUser | null | false>(false);
 
   useEffect(() => {
-    return onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      if (!user) window.localStorage.removeItem("user");
-      else window.localStorage.setItem("user", JSON.stringify(user));
-    });
+    return onAuthStateChanged(auth, (user) => setUser(user));
   }, []);
 
   return user;
